@@ -292,14 +292,16 @@ function clientServerDiagram() {
     <text x="495" y="65" class="diag-label">SERVER</text>
     <line x1="120" y1="50" x2="223" y2="50" class="diag-arrow"/>
     <text x="170" y="40" class="diag-arrow-label">request</text>
-    <line x1="335" y1="70" x2="438" y2="70" class="diag-arrow"/>
-    <line x1="438" y1="85" x2="335" y2="85" class="diag-arrow diag-arrow-back"/>
-    <line x1="223" y1="65" x2="120" y2="65" class="diag-arrow diag-arrow-back"/>
+    <line x1="335" y1="50" x2="438" y2="50" class="diag-arrow"/>
+    <text x="386" y="40" class="diag-arrow-label">request</text>
+    <line x1="438" y1="70" x2="335" y2="70" class="diag-arrow diag-arrow-back"/>
+    <line x1="223" y1="70" x2="120" y2="70" class="diag-arrow diag-arrow-back"/>
     <text x="170" y="100" class="diag-arrow-label">response (JSON)</text>
+    <text x="386" y="100" class="diag-arrow-label">response (JSON)</text>
     <polygon points="213,46 223,50 213,54" class="diag-arrowhead"/>
-    <polygon points="130,61 120,65 130,69" class="diag-arrowhead"/>
-    <polygon points="428,66 438,70 428,74" class="diag-arrowhead"/>
-    <polygon points="345,81 335,85 345,89" class="diag-arrowhead"/>
+    <polygon points="130,66 120,70 130,74" class="diag-arrowhead"/>
+    <polygon points="428,46 438,50 428,54" class="diag-arrowhead"/>
+    <polygon points="345,66 335,70 345,74" class="diag-arrowhead"/>
   </svg>`;
 }
 
