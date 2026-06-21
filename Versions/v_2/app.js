@@ -296,11 +296,11 @@ function clientServerDiagram() {
     <text x="386" y="40" class="diag-arrow-label">request</text>
     <line x1="438" y1="70" x2="335" y2="70" class="diag-arrow diag-arrow-back"/>
     <line x1="223" y1="70" x2="120" y2="70" class="diag-arrow diag-arrow-back"/>
-    <text x="170" y="100" class="diag-arrow-label">response (JSON)</text>
-    <text x="386" y="100" class="diag-arrow-label">response (JSON)</text>
-    <polygon points="213,46 223,50 213,54" class="diag-arrowhead"/>
+    <text x="170" y="85" class="diag-arrow-label">response (JSON)</text>
+    <text x="386" y="85" class="diag-arrow-label">response (JSON)</text>
+    <polygon points="215,46 225,50 215,54" class="diag-arrowhead"/>
     <polygon points="130,66 120,70 130,74" class="diag-arrowhead"/>
-    <polygon points="428,46 438,50 428,54" class="diag-arrowhead"/>
+    <polygon points="430,46 440,50 430,54" class="diag-arrowhead"/>
     <polygon points="345,66 335,70 345,74" class="diag-arrowhead"/>
   </svg>`;
 }
