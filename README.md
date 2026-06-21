@@ -1,49 +1,50 @@
 # API Academy 🛰️
 
-Ek interactive, lesson-wise web course jo tumhe sikhata hai **apna khud ka API kaise banate hain** — seedha browser mein, asli Python code likh kar, turant check ke saath.
+An interactive, lesson-by-lesson web course that teaches you **how to build your own API** — right in the browser, by writing real Python code, with instant checking as you go.
 
-## Chalu kaise karein
+## How to run it
 
-Kisi installation ki zaroorat nahi. Bas:
+No installation required. Just:
 
-1. Is folder ko unzip karo.
-2. `index.html` ko seedha apne browser (Chrome/Edge/Firefox) mein double-click karke kholo.
+1. Unzip this folder.
+2. Open `index.html` directly in your browser (Chrome/Edge/Firefox) by double-clicking it.
 
-**Ya** agar tumhare paas Python installed hai, ek local server se kholna behtar rahega (kuch browsers file:// se fonts/scripts thoda strict treat karte hain):
+**Or**, if you have Python installed, running it through a local server is slightly more reliable (some browsers are picky about fonts/scripts over `file://`):
 
 ```bash
 cd api-academy
 python3 -m http.server 8000
 ```
 
-Fir browser mein kholo: `http://localhost:8000`
+Then open `http://localhost:8000` in your browser.
 
-Pehli baar load hone mein 5-10 second lag sakte hain — kyunki ye ek poora Python engine (Pyodide) tumhare browser ke andar download kar raha hota hai. Uske baad sab kuch instant chalega, aur **internet ke bina bhi** (Pyodide aane ke baad) kaam karega.
+The first load may take 5–10 seconds, because a full Python engine (Pyodide) is being downloaded into your browser. After that, everything runs instantly, and will keep working **even without an internet connection** (once Pyodide has loaded once).
 
-## Ye kaam kaise karta hai
+## How it works
 
-- **Koi backend nahi, koi API key nahi, koi daily limit nahi.** Saara code execution browser ke andar [Pyodide](https://pyodide.org) (Python compiled to WebAssembly) se hota hai. Isliye check karne ka koi rate-limit ya cost nahi — jitni baar chaaho, run karo.
-- Tumhara FastAPI jaisa syntax (`@app.get`, `@app.post`, path/query params, `HTTPException`) ek chhote teaching-framework `MiniAPI` se chalta hai jo isi project ke andar (`app.js` ke top mein `BRIDGE_PY`) likha gaya hai. Pattern bilkul real **FastAPI** jaisa hai — jab tum real FastAPI install karoge, yehi syntax kaam karega.
-- Progress browser ke `localStorage` mein save hoti hai, isliye tab band karke wapas aane par wahin se shuru hoga jahan chhoda tha.
+- **No backend, no API key, no daily limits.** All code execution happens inside the browser via [Pyodide](https://pyodide.org) (Python compiled to WebAssembly). So there's no rate limit or cost to checking your work — run it as many times as you like.
+- Your FastAPI-style syntax (`@app.get`, `@app.post`, path/query parameters, `HTTPException`) runs through a small teaching framework called `MiniAPI`, written inside this project (see `BRIDGE_PY` at the top of `app.js`). The pattern mirrors real **FastAPI** closely, so the same syntax will work when you install the real thing.
+- Your progress is saved in the browser's `localStorage`, so closing the tab and coming back picks up right where you left off.
+- A light and dark theme are both built in (toggle with the 🌙/☀️ button in the top bar) — the dark theme leans into a classic engineering-blueprint look, with light linework on a deep navy background.
 
 ## Curriculum
 
 | Route | Topic |
 |---|---|
-| 01 | API hota kya hai (concept quiz) |
-| 02 | Toolkit setup + apna Python engine test |
-| 03 | Pehla endpoint — `GET /hello` |
+| 01 | What is an API (concept quiz) |
+| 02 | Toolkit setup + testing your Python engine |
+| 03 | Your first endpoint — `GET /hello` |
 | 04 | Path parameters — `/items/{item_id}` |
 | 05 | Query parameters & default values |
-| 06 | POST se naya data create karna |
-| 07 | API keys generate karna aur endpoint secure karna |
-| 08 | **Capstone:** ek poori Notes API — sab kuch ek saath |
+| 06 | Creating data with POST |
+| 07 | Generating API keys and securing an endpoint |
+| 08 | **Capstone:** a complete Notes API — everything combined |
 
-Har code-lesson mein: concept explanation → ek example → ek editable code editor → "Check karo" button jo tumhare code ko run karke real tests ke against verify karta hai → hint agar kuch fail ho.
+Each coding lesson follows the same shape: a concept explanation → an example → an editable code editor → a "Check" button that runs your code against real tests → a hint if something fails.
 
-## `bonus/` folder — Real FastAPI project
+## `bonus/` folder — a real FastAPI project
 
-Ye web-course ek teaching-simulation hai (taaki bina kuch install kiye seekh sako). Jab tum capstone complete kar lo, `bonus/main.py` mein bilkul wahi Notes API hai, lekin **asli FastAPI** se likhi hui, jo tum apne computer pe chala sakte ho:
+This web course is a teaching simulation (so you can learn without installing anything). Once you finish the capstone, `bonus/main.py` contains the exact same Notes API, but written with **actual FastAPI**, ready to run on your own machine:
 
 ```bash
 cd bonus
@@ -51,35 +52,42 @@ pip install -r requirements.txt --break-system-packages
 uvicorn main:app --reload
 ```
 
-Fir browser mein kholo `http://127.0.0.1:8000/docs` — FastAPI khud-ba-khud ek interactive testing page (Swagger UI) bana deta hai jahan tum apne endpoints live test kar sakte ho. Yahi woh moment hai jab tumhara API "real duniya" mein chalta hai.
+Then open `http://127.0.0.1:8000/docs` in your browser — FastAPI automatically generates an interactive testing page (Swagger UI) where you can try your endpoints live. This is the moment your API runs in the real world.
 
-## API key generate karne ka quick reference
+## Quick reference: generating an API key
 
 ```python
 import secrets
 
-API_KEY = secrets.token_hex(16)   # ek safe, random, 32-character key
+API_KEY = secrets.token_hex(16)   # a safe, random, 32-character key
 ```
 
-Is key ko request bhejne wale ko `x-api-key` header mein bhejna hota hai, aur server us header ko verify karta hai (poora hands-on Route 07 mein hai).
+Whoever calls your API sends this key in an `x-api-key` header, and your server verifies that header on each request (the full hands-on walkthrough is in Route 07).
 
 ## Project structure
 
 ```
 api-academy/
-├── index.html        ← entry point, isi ko kholna hai
-├── style.css          ← visual design (blueprint theme)
-├── lessons.js          ← saari lesson content, explanations, tests
-├── app.js              ← app logic + Python bridge (Pyodide)
+├── index.html        ← entry point, open this one
+├── style.css           ← visual design (blueprint theme, light + dark)
+├── lessons.js           ← all lesson content, explanations, tests
+├── app.js                ← app logic + Python bridge (Pyodide)
 └── bonus/
-    ├── main.py          ← real, runnable FastAPI version
+    ├── main.py              ← real, runnable FastAPI version
     └── requirements.txt
 ```
 
-## Reset progress
+## Version History
 
-Sidebar ke neeche "↺ Reset progress" button se kabhi bhi shuru se start kar sakte ho.
+| Version | Changes |
+|---|---|
+| **v1** | Initial release. Light "blueprint paper" theme only. All 8 lessons (concept quiz through the Notes API capstone), in-browser Python checking via Pyodide, and the `bonus/` real FastAPI starter. README in Hinglish. |
+| **v2** | Added a light/dark theme toggle (🌙/☀️ button in the top bar). Dark mode uses a classic engineering-blueprint cyanotype look — light linework on deep navy — and the choice is remembered via `localStorage`. README translated to English. Fixed the client/server diagram's arrowheads, which were misaligned (pointing the wrong way near the client, and sitting at the wrong position near the server). |
+
+## Resetting progress
+
+Use the "↺ Reset progress" button at the bottom of the sidebar to start over from scratch at any time.
 
 ---
 
-Bana ke maza aaye, seekh ke aur zyada aaye. Happy shipping 🚀
+Have fun building it, and even more fun learning from it. Happy shipping 🚀
